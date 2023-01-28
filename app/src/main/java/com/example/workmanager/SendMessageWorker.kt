@@ -15,9 +15,10 @@ class SendMessageWorker(
 ) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
+        val messageText=workerParameters.inputData.getString("message") ?: return Result.failure()
         setForeground(getForegroundInfo())
         delay(3000)
-        Log.i("WorkerMessage","Message was sent")
+        Log.i("WorkerMessage","Message was sent : $messageText")
         return Result.success()
     }
     private fun getNotification():Notification{
