@@ -1,4 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext{
+        work_version="2.7.1"
+    }
+    repositories {
+        google()
+    }
+    dependencies {
+
+    }
+}
 plugins {
     id 'com.android.application' version '7.4.0' apply false
     id 'com.android.library' version '7.4.0' apply false
