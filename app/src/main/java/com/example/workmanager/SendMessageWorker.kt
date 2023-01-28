@@ -7,6 +7,7 @@ import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.delay
 
 class SendMessageWorker(
@@ -16,9 +17,11 @@ class SendMessageWorker(
 
     override suspend fun doWork(): Result {
         val messageText=workerParameters.inputData.getString("message") ?: return Result.failure()
+        setProgress(workDataOf("loading" to true))
         setForeground(getForegroundInfo())
         delay(3000)
         Log.i("WorkerMessage","Message was sent : $messageText")
+        setProgress(workDataOf("loading" to false))
         return Result.success()
     }
     private fun getNotification():Notification{
